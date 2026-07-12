@@ -1,55 +1,49 @@
-//
-//  ContentView.swift
-//  DeutschLernen
-//
-//  Created by Mustafa TAVASLI on 12.07.2026.
-//
-
 import SwiftUI
 import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+    @Query private var entries: [Entry]
 
     var body: some View {
-        NavigationSplitView {
+        NavigationStack {
             List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+                ForEach(entries) { entry in
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(entry.turkish)
+                            .font(.headline)
+                        Text(entry.german)
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
                     }
                 }
-                .onDelete(perform: deleteItems)
+                .onDelete(perform: deleteEntries)
             }
+            .navigationTitle("Entries")
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .topBarTrailing) {
                     EditButton()
                 }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(action: addEntry) {
+                        Label("Add Entry", systemImage: "plus")
                     }
                 }
             }
-        } detail: {
-            Text("Select an item")
         }
     }
 
-    private func addItem() {
+    private func addEntry() {
         withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
+            let newEntry = Entry(turkish: "Merhaba", german: "Hallo")
+            modelContext.insert(newEntry)
         }
     }
 
-    private func deleteItems(offsets: IndexSet) {
+    private func deleteEntries(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
-                modelContext.delete(items[index])
+                modelContext.delete(entries[index])
             }
         }
     }
@@ -57,5 +51,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+        .modelContainer(for: Entry.self, inMemory: true)
 }
