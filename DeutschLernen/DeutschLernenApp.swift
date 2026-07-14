@@ -5,7 +5,7 @@ import SwiftData
 struct DeutschLernenApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView()
         }
         .modelContainer(DataStore.container)
     }
