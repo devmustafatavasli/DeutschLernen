@@ -10,6 +10,7 @@ final class Entry {
     var createdAt: Date = Date()
     // Leitner modelinde kullanmak için değer tutuyoruz.
     var box: Int8 = 1
+    var isFavorite: Bool = false
     var lastReviewedAt: Date?
     // Test sürecindeki işlemler için değer tutuyoruz.
     var correctCount: Int = 0
