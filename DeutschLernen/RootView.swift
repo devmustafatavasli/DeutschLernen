@@ -4,7 +4,7 @@ import SwiftData
 struct RootView: View {
     var body: some View {
         TabView {
-            ContentView()
+            EntriesView()
                 .tabItem {
                     Label("Kayıtlar", systemImage: "list.bullet.rectangle")
                 }
