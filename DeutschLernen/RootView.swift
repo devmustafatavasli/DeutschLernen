@@ -9,12 +9,12 @@ struct RootView: View {
                     Label("Kayıtlar", systemImage: "list.bullet.rectangle")
                 }
 
-            TestPlaceholderView()
+            TestView()
                 .tabItem {
                     Label("Test", systemImage: "rectangle.stack")
                 }
 
-            SettingsPlaceholderView()
+            SettingsView()
                 .tabItem {
                     Label("Ayarlar", systemImage: "gear")
                 }
@@ -22,21 +22,26 @@ struct RootView: View {
     }
 }
 
-struct TestPlaceholderView: View {
+struct SettingsView: View {
     var body: some View {
         NavigationStack {
-            Text("Test modası burada gelecek")
-                .navigationTitle("Test")
+            List {
+                Section("Hakkında") {
+                    LabeledContent("Sürüm", value: appVersion)
+                    Text("DeutschLernen, Türkçe'den Almanca'ya günlük ifadeleri yakalayıp tekrar etmek için kişisel bir uygulama.")
+                }
+                Section {
+                    Link("Kısayollar Uygulamasını Aç", destination: URL(string: "shortcuts://")!)
+                }
+            }
+            .navigationTitle("Ayarlar")
         }
     }
-}
 
-struct SettingsPlaceholderView: View {
-    var body: some View {
-        NavigationStack {
-            Text("Ayarlar burada gelecek")
-                .navigationTitle("Ayarlar")
-        }
+    private var appVersion: String {
+        let short = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "-"
+        let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "-"
+        return "\(short) (\(build))"
     }
 }
 

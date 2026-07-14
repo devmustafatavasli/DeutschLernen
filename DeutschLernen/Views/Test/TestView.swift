@@ -1,0 +1,97 @@
+import SwiftUI
+import SwiftData
+
+struct TestView: View {
+    @Environment(\.modelContext) private var modelContext
+    @Query(sort: \Entry.createdAt) private var entries: [Entry]
+    @State private var currentEntry: Entry?
+    @State private var isGermanRevealed = false
+
+    var body: some View {
+        NavigationStack {
+            Group {
+                if entries.isEmpty {
+                    ContentUnavailableView(
+                        "Henüz Kayıt Bulunamadı",
+                        systemImage: "text.bubble",
+                        description: Text("Önce kayıt ekleyin")
+                    )
+                } else if let current = currentEntry {
+                    ZStack {
+                        CardDeckView(
+                            items: [current],
+                            maxVisible: 1,
+                            cardContent: { entry in
+                                testCard(entry)
+                            },
+                            interpretDrag: { translation in
+                                let absH = abs(translation.height)
+                                let absW = abs(translation.width)
+                                if absW > 100 && absW > absH {
+                                    return translation.width > 0 ? .right : .left
+                                }
+                                return nil
+                            },
+                            onSwipe: { entry, direction in
+                                let correct = direction == .right
+                                entry.recordGrade(correct: correct)
+                                try? modelContext.save()
+                                isGermanRevealed = false
+                                currentEntry = LeitnerScheduler.weightedNextEntry(excluding: entry, from: entries)
+                            }
+                        )
+                    }
+                    .padding(16)
+                } else {
+                    Text("Yükleniyor...")
+                        .onAppear { pickNextEntry() }
+                }
+            }
+            .navigationTitle("Test")
+        }
+        .onAppear {
+            if currentEntry == nil {
+                pickNextEntry()
+            }
+        }
+    }
+
+    private func testCard(_ entry: Entry) -> some View {
+        VStack(alignment: .leading, spacing: 24) {
+            Text(entry.turkish)
+                .font(.title2.weight(.semibold))
+
+            if isGermanRevealed {
+                Text(entry.german)
+                    .font(.title3)
+                    .foregroundStyle(.secondary)
+            } else {
+                Text("Almancasını düşün, sonra dokun")
+                    .font(.title3)
+                    .foregroundStyle(.tertiary)
+            }
+
+            Spacer()
+
+            HStack {
+                Text("✓ Doğru: sağa")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                Spacer()
+                Text("✗ Yanlış: sola")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(24)
+        .modifier(CardBackground())
+        .onTapGesture {
+            withAnimation { isGermanRevealed.toggle() }
+        }
+    }
+
+    private func pickNextEntry() {
+        currentEntry = LeitnerScheduler.weightedNextEntry(excluding: nil, from: entries)
+    }
+}
