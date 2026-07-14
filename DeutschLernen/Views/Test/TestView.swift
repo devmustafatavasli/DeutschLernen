@@ -38,6 +38,13 @@ struct TestView: View {
                                 try? modelContext.save()
                                 isGermanRevealed = false
                                 currentEntry = LeitnerScheduler.weightedNextEntry(excluding: entry, from: entries)
+                            },
+                            cardColor: { entry in
+                                if let idx = entries.firstIndex(where: { $0.persistentModelID == entry.persistentModelID }) {
+                                    CardColor.forIndex(idx)
+                                } else {
+                                    .red
+                                }
                             }
                         )
                     }

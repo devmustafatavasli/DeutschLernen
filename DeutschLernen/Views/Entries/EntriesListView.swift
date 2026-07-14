@@ -15,9 +15,11 @@ struct EntriesListView: View {
                 )
             } else {
                 List {
-                    ForEach(entries) { entry in
+                    ForEach(Array(entries.enumerated()), id: \.element.id) { index, entry in
                         NavigationLink(value: entry) {
                             EntryCard(entry: entry)
+                                .background(CardColor.forIndex(index).background())
+                                .cornerRadius(16)
                         }
                         .listRowSeparator(.hidden)
                         .listRowBackground(Color.clear)

@@ -12,23 +12,32 @@ struct CardDeckView<Item: Identifiable, CardContent: View>: View {
     @ViewBuilder var cardContent: (Item) -> CardContent
     var interpretDrag: (CGSize) -> DeckSwipeDirection?
     var onSwipe: (Item, DeckSwipeDirection) -> Void
+    var cardColor: (Item) -> CardColor = { _ in .red }
 
     @State private var dragTranslation: CGSize = .zero
-    @State private var isExiting = false
+    private let cardHeight: CGFloat = 220
+    private let cardSpacing: CGFloat = 24
 
     var body: some View {
-        ZStack {
-            ForEach(Array(items.prefix(maxVisible).enumerated().reversed()), id: \.element.id) { index, item in
-                cardContent(item)
-                    .scaleEffect(1 - CGFloat(index) * 0.05)
-                    .offset(y: CGFloat(index) * 10)
-                    .opacity(index == 0 ? 1 : 0.85)
-                    .offset(index == 0 ? dragTranslation : .zero)
-                    .rotationEffect(index == 0 ? .degrees(Double(dragTranslation.width / 20)) : .zero)
-                    .zIndex(Double(maxVisible - index))
-                    .gesture(index == 0 ? frontDragGesture(for: item) : nil)
+        VStack(alignment: .center, spacing: 0) {
+            ForEach(Array(items.prefix(maxVisible).enumerated()), id: \.element.id) { index, item in
+                ZStack {
+                    cardColor(item).background()
+                        .cornerRadius(16)
+
+                    cardContent(item)
+                        .lineLimit(3)
+                }
+                .frame(height: cardHeight)
+                .scaleEffect(1 - CGFloat(index) * 0.06, anchor: .top)
+                .offset(y: CGFloat(index) * cardSpacing)
+                .zIndex(Double(maxVisible - index))
+                .gesture(index == 0 ? frontDragGesture(for: item) : nil)
+                .offset(index == 0 ? dragTranslation : .zero)
             }
+            Spacer()
         }
+        .frame(maxWidth: .infinity)
     }
 
     private func frontDragGesture(for item: Item) -> some Gesture {
@@ -38,19 +47,21 @@ struct CardDeckView<Item: Identifiable, CardContent: View>: View {
                 if let direction = interpretDrag(value.translation) {
                     exit(item, direction)
                 } else {
-                    withAnimation(.spring) { dragTranslation = .zero }
+                    withAnimation(.interpolatingSpring(stiffness: 100, damping: 10)) {
+                        dragTranslation = .zero
+                    }
                 }
             }
     }
 
     private func exit(_ item: Item, _ direction: DeckSwipeDirection) {
         let target: CGSize = switch direction {
-        case .up: CGSize(width: 0, height: -600)
-        case .left: CGSize(width: -600, height: 0)
-        case .right: CGSize(width: 600, height: 0)
+        case .up: CGSize(width: 0, height: -800)
+        case .left: CGSize(width: -800, height: 0)
+        case .right: CGSize(width: 800, height: 0)
         }
-        withAnimation(.easeOut(duration: 0.25)) { dragTranslation = target }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+        withAnimation(.easeOut(duration: 0.4)) { dragTranslation = target }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
             onSwipe(item, direction)
             dragTranslation = .zero
         }

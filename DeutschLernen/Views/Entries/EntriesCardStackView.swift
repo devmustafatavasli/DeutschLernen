@@ -21,9 +21,7 @@ struct EntriesCardStackView: View {
                         items: visibleEntries,
                         maxVisible: 3,
                         cardContent: { entry in
-                            NavigationLink(value: entry) {
-                                EntryCard(entry: entry)
-                            }
+                            EntryCard(entry: entry)
                         },
                         interpretDrag: { translation in
                             abs(translation.height) > 100 && abs(translation.height) > abs(translation.width) && translation.height < 0 ? .up : nil
@@ -31,6 +29,13 @@ struct EntriesCardStackView: View {
                         onSwipe: { _, direction in
                             if direction == .up {
                                 rotation = (rotation + 1) % entries.count
+                            }
+                        },
+                        cardColor: { entry in
+                            if let idx = entries.firstIndex(where: { $0.persistentModelID == entry.persistentModelID }) {
+                                CardColor.forIndex(idx)
+                            } else {
+                                .red
                             }
                         }
                     )
