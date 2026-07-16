@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		5024DC2492A72523F88A6ABD /* DeutschLernenWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3B868C315EF53C250E19C787 /* DeutschLernenWidgetExtension.appex */; };
+		6C8D295FBA3E7E0234595389 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB74A47C259C5B70EEC57746 /* Foundation.framework */; };
 		7CC7341FF37B70F67F9D1ADC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB74A47C259C5B70EEC57746 /* Foundation.framework */; };
+		EC76DAB4A6C4096265BD0813 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB74A47C259C5B70EEC57746 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +39,8 @@
 
 /* Begin PBXFileReference section */
 		3B868C315EF53C250E19C787 /* DeutschLernenWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DeutschLernenWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		51395B7D27B10A22B1452173 /* DeutschLernenUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DeutschLernenUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D2F8A1EFB4056637228A469 /* DeutschLernenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DeutschLernenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC13A16F300417CF00CA8AFA /* DeutschLernen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeutschLernen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB74A47C259C5B70EEC57746 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
@@ -52,11 +56,27 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		37D73476684019208FAAAF67 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC76DAB4A6C4096265BD0813 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		805E942DCBF6FD3724BD6264 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				7CC7341FF37B70F67F9D1ADC /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A31D1A23D53BAE809895C2D0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C8D295FBA3E7E0234595389 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,6 +112,8 @@
 			children = (
 				BC13A16F300417CF00CA8AFA /* DeutschLernen.app */,
 				3B868C315EF53C250E19C787 /* DeutschLernenWidgetExtension.appex */,
+				8D2F8A1EFB4056637228A469 /* DeutschLernenTests.xctest */,
+				51395B7D27B10A22B1452173 /* DeutschLernenUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -107,6 +129,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		013B35BF0753FD0269263C56 /* DeutschLernenTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 159222F70140669B39B5EBA8 /* Build configuration list for PBXNativeTarget "DeutschLernenTests" */;
+			buildPhases = (
+				DF9CE8A84088CB7014C25B8B /* Sources */,
+				37D73476684019208FAAAF67 /* Frameworks */,
+				5A07BA18AFB6DA2193ADB441 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DeutschLernenTests;
+			productName = DeutschLernenTests;
+			productReference = 8D2F8A1EFB4056637228A469 /* DeutschLernenTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		99D0B851FA59A536F6D4FAE8 /* DeutschLernenWidgetExtension */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 645D8A927D454EFC827A56BA /* Build configuration list for PBXNativeTarget "DeutschLernenWidgetExtension" */;
@@ -146,6 +185,23 @@
 			productReference = BC13A16F300417CF00CA8AFA /* DeutschLernen.app */;
 			productType = "com.apple.product-type.application";
 		};
+		D1E5A93B10A21D4133C98F3F /* DeutschLernenUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D1A3A253D32CEFC3347681F8 /* Build configuration list for PBXNativeTarget "DeutschLernenUITests" */;
+			buildPhases = (
+				D26541290ED9C98BBFAF070D /* Sources */,
+				A31D1A23D53BAE809895C2D0 /* Frameworks */,
+				BA90890CA993CE7847A10711 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DeutschLernenUITests;
+			productName = DeutschLernenUITests;
+			productReference = 51395B7D27B10A22B1452173 /* DeutschLernenUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -177,12 +233,28 @@
 			targets = (
 				BC13A16E300417CF00CA8AFA /* DeutschLernen */,
 				99D0B851FA59A536F6D4FAE8 /* DeutschLernenWidgetExtension */,
+				013B35BF0753FD0269263C56 /* DeutschLernenTests */,
+				D1E5A93B10A21D4133C98F3F /* DeutschLernenUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5A07BA18AFB6DA2193ADB441 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6ACBF5BCD008B1597A74E0EA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BA90890CA993CE7847A10711 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -213,6 +285,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D26541290ED9C98BBFAF070D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DF9CE8A84088CB7014C25B8B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -225,6 +311,32 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		372AEE989278754515BBE056 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				PRODUCT_NAME = DeutschLernenTests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = DeutschLernen;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4AD3A787ED2E29E89F04DF0D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				PRODUCT_NAME = DeutschLernenUITests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = DeutschLernen;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		67273AA2899B976048F623C5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -259,6 +371,18 @@
 				PRODUCT_NAME = DeutschLernenWidgetExtension;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		AC4B9EF7403F89A4113AB79D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				PRODUCT_NAME = DeutschLernenTests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = DeutschLernen;
 			};
 			name = Debug;
 		};
@@ -449,9 +573,30 @@
 			};
 			name = Release;
 		};
+		FBFF75D5329551C332B49355 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				PRODUCT_NAME = DeutschLernenUITests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = DeutschLernen;
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		159222F70140669B39B5EBA8 /* Build configuration list for PBXNativeTarget "DeutschLernenTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				372AEE989278754515BBE056 /* Release */,
+				AC4B9EF7403F89A4113AB79D /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		645D8A927D454EFC827A56BA /* Build configuration list for PBXNativeTarget "DeutschLernenWidgetExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -475,6 +620,15 @@
 			buildConfigurations = (
 				BC13A17D300417D000CA8AFA /* Debug */,
 				BC13A17E300417D000CA8AFA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D1A3A253D32CEFC3347681F8 /* Build configuration list for PBXNativeTarget "DeutschLernenUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4AD3A787ED2E29E89F04DF0D /* Release */,
+				FBFF75D5329551C332B49355 /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
