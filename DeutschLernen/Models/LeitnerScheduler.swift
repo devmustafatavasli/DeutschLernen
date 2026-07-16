@@ -17,6 +17,11 @@ extension Entry {
 enum LeitnerScheduler {
     // Ağırlıklı rastgele seçim: kutu numarası düşük olan kart daha sık gelsin.
     static func weightedNextEntry(excluding current: Entry?, from pool: [Entry]) -> Entry? {
+        var generator = SystemRandomNumberGenerator()
+        return weightedNextEntry(excluding: current, from: pool, using: &generator)
+    }
+
+    static func weightedNextEntry<RNG: RandomNumberGenerator>(excluding current: Entry?, from pool: [Entry], using generator: inout RNG) -> Entry? {
         let candidates = pool.count > 1 ? pool.filter { $0.persistentModelID != current?.persistentModelID } : pool
         guard !candidates.isEmpty else { return nil }
 
@@ -24,7 +29,7 @@ enum LeitnerScheduler {
         let weights = candidates.map { Double(maxBox + 1 - $0.box) }
         let total = weights.reduce(0, +)
 
-        var r = Double.random(in: 0..<total)
+        var r = Double.random(in: 0..<total, using: &generator)
         for (entry, weight) in zip(candidates, weights) {
             if r < weight { return entry }
             r -= weight

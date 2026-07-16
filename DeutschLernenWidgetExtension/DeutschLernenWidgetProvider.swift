@@ -28,15 +28,13 @@ struct DeutschLernenWidgetProvider: TimelineProvider {
 
     private func fetchCurrentEntry() -> Entry? {
         do {
-            let container = try ModelContainer(for: Entry.self, configurations: ModelConfiguration(schema: Schema([Entry.self]), isStoredInMemoryOnly: false, groupContainer: .identifier(DataStore.appGroupID)))
-            let context = ModelContext(container)
+            let context = ModelContext(DataStore.container)
             let descriptor = FetchDescriptor<Entry>(sortBy: [SortDescriptor(\.createdAt)])
             let entries = try context.fetch(descriptor)
 
             guard !entries.isEmpty else { return nil }
 
-            let defaults = UserDefaults(suiteName: DataStore.appGroupID)
-            let index = defaults?.integer(forKey: "widgetEntryIndex") ?? 0
+            let index = DataStore.sharedDefaults.integer(forKey: "widgetEntryIndex")
             return entries[index % entries.count]
         } catch {
             return nil
