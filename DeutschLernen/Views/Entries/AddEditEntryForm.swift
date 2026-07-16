@@ -7,6 +7,7 @@ enum EntryFormMode: Identifiable {
 
     var id: String {
         switch self {
+        // Her modalda benzersiz bir id, sheet'in durumunu yeniden oluşturmasını sağlar (state yeniden kullanmaması için).
         case .create: "create"
         case .edit(let entry): "edit-\(entry.persistentModelID)"
         }

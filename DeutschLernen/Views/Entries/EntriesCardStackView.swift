@@ -14,6 +14,7 @@ struct EntriesCardStackView: View {
                     description: Text("Action Button veya Elle İlk İfadeni Yakala")
                 )
             } else {
+                // Rotation indeksini kullanarak dairesel döngü yapıyoruz; liste yeniden sırala yerine.
                 let visibleEntries = Array(entries.indices.prefix(3).map { (entries[($0 + rotation) % entries.count]) })
 
                 ZStack {

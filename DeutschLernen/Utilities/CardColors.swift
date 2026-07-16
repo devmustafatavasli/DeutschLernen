@@ -18,6 +18,7 @@ enum CardColor: Hashable, CaseIterable {
     }
 
     static func forIndex(_ index: Int) -> CardColor {
+        // Sabit renk paletini döngüsel olarak ata; giriş sayısı herhangi bir miktar olabilir.
         Self.allCases[index % Self.allCases.count]
     }
 }

@@ -31,6 +31,7 @@ struct CardDeckView<Item: Identifiable, CardContent: View>: View {
                 .frame(height: cardHeight)
                 .scaleEffect(1 - CGFloat(index) * 0.06, anchor: .top)
                 .offset(y: CGFloat(index) * cardSpacing)
+                // Yüksek indeks = öndeki kart, düşük indeks = arkadaki kart (görsel sıralama).
                 .zIndex(Double(maxVisible - index))
                 .gesture(index == 0 ? frontDragGesture(for: item) : nil)
                 .offset(index == 0 ? dragTranslation : .zero)
@@ -61,6 +62,7 @@ struct CardDeckView<Item: Identifiable, CardContent: View>: View {
         case .right: CGSize(width: 800, height: 0)
         }
         withAnimation(.easeOut(duration: 0.4)) { dragTranslation = target }
+        // 0.4 saniye çıkış animasyonu tamamlanıncaya kadar bekle, sonra geri sıfırla.
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
             onSwipe(item, direction)
             dragTranslation = .zero

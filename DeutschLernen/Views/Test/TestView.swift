@@ -28,11 +28,13 @@ struct TestView: View {
                                 let absH = abs(translation.height)
                                 let absW = abs(translation.width)
                                 if absW > 100 && absW > absH {
+                                    // Spec: sağa = doğru, sola = yanlış.
                                     return translation.width > 0 ? .right : .left
                                 }
                                 return nil
                             },
                             onSwipe: { entry, direction in
+                                // Doğru/yanlış yanıt kaydı ve sonraki kaydı hemen yükle.
                                 let correct = direction == .right
                                 entry.recordGrade(correct: correct)
                                 try? modelContext.save()

@@ -15,6 +15,7 @@ struct EntriesListView: View {
                 )
             } else {
                 List {
+                    // Renk sıralaması için indeks gerekli, bu yüzden enumerated() kullanıyoruz.
                     ForEach(Array(entries.enumerated()), id: \.element.id) { index, entry in
                         NavigationLink(value: entry) {
                             EntryCard(entry: entry)
