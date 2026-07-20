@@ -48,8 +48,6 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		BC13A171300417CF00CA8AFA /* DeutschLernen */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
 			path = DeutschLernen;
 			sourceTree = "<group>";
 		};
