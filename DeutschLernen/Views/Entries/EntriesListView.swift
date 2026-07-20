@@ -15,20 +15,21 @@ struct EntriesListView: View {
                 )
             } else {
                 List {
-                    // Renk sıralaması için indeks gerekli, bu yüzden enumerated() kullanıyoruz.
                     ForEach(Array(entries.enumerated()), id: \.element.id) { index, entry in
                         NavigationLink(value: entry) {
                             EntryCard(entry: entry)
                                 .background(CardColor.forIndex(index).background())
-                                .cornerRadius(16)
+                                .cornerRadius(AppSpacing.cornerLarge)
                         }
                         .listRowSeparator(.hidden)
                         .listRowBackground(Color.clear)
-                        .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+                        .listRowInsets(EdgeInsets(top: AppSpacing.sm, leading: AppSpacing.lg, bottom: AppSpacing.sm, trailing: AppSpacing.lg))
                     }
                     .onDelete(perform: deleteEntries)
                 }
                 .listStyle(.plain)
+                .scrollContentBackground(.hidden)
+                .background(AppColor.background)
             }
         }
     }

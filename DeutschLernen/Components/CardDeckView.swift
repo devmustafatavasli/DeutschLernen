@@ -27,18 +27,41 @@ struct CardDeckView<Item: Identifiable, CardContent: View>: View {
 
                     cardContent(item)
                         .lineLimit(3)
+
+                    // Tinder-style color feedback overlay
+                    if index == 0 {
+                        feedbackOverlay()
+                    }
                 }
                 .frame(height: cardHeight)
                 .scaleEffect(1 - CGFloat(index) * 0.06, anchor: .top)
                 .offset(y: CGFloat(index) * cardSpacing)
-                // Yüksek indeks = öndeki kart, düşük indeks = arkadaki kart (görsel sıralama).
                 .zIndex(Double(maxVisible - index))
                 .gesture(index == 0 ? frontDragGesture(for: item) : nil)
                 .offset(index == 0 ? dragTranslation : .zero)
+                .rotationEffect(.degrees(index == 0 ? tiltRotation() : 0), anchor: .bottom)
             }
             Spacer()
         }
         .frame(maxWidth: .infinity)
+    }
+
+    private func tiltRotation() -> Double {
+        let rotation = (dragTranslation.width / 100).clamped(to: -1...1) * 15
+        return Double(rotation)
+    }
+
+    private func feedbackOverlay() -> some View {
+        let absWidth = abs(dragTranslation.width)
+        let maxDragDistance: CGFloat = 200
+        let progress = min(absWidth / maxDragDistance, 1.0)
+
+        let isRightSwipe = dragTranslation.width > 0
+        let feedbackColor = isRightSwipe ? AppColor.success : AppColor.error
+
+        return feedbackColor
+            .opacity(progress * 0.3)
+            .cornerRadius(16)
     }
 
     private func frontDragGesture(for item: Item) -> some Gesture {
@@ -48,7 +71,7 @@ struct CardDeckView<Item: Identifiable, CardContent: View>: View {
                 if let direction = interpretDrag(value.translation) {
                     exit(item, direction)
                 } else {
-                    withAnimation(.interpolatingSpring(stiffness: 100, damping: 10)) {
+                    withAnimation(.interpolatingSpring(stiffness: 120, damping: 14)) {
                         dragTranslation = .zero
                     }
                 }
@@ -62,10 +85,15 @@ struct CardDeckView<Item: Identifiable, CardContent: View>: View {
         case .right: CGSize(width: 800, height: 0)
         }
         withAnimation(.easeOut(duration: 0.4)) { dragTranslation = target }
-        // 0.4 saniye çıkış animasyonu tamamlanıncaya kadar bekle, sonra geri sıfırla.
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
             onSwipe(item, direction)
             dragTranslation = .zero
         }
+    }
+}
+
+extension Comparable {
+    func clamped(to limits: ClosedRange<Self>) -> Self {
+        return min(max(self, limits.lowerBound), limits.upperBound)
     }
 }

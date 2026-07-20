@@ -16,15 +16,15 @@ struct SettingsView: View {
                             Label("Action Button'ı Konfigüre Et", systemImage: "cube.transparent")
                             Spacer()
                             Image(systemName: "chevron.right")
-                                .foregroundStyle(.secondary)
+                                .foregroundStyle(AppColor.textTertiary)
                         }
-                        .foregroundStyle(.primary)
+                        .foregroundStyle(AppColor.textPrimary)
                     }
                 }
 
                 Section {
                     Link("Kısayollar Uygulamasını Aç", destination: URL(string: "shortcuts://")!)
-                        .foregroundStyle(.blue)
+                        .foregroundStyle(AppColor.primary)
                 }
             }
             .navigationTitle("Ayarlar")
@@ -47,93 +47,101 @@ struct ActionButtonSetupView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(alignment: .leading, spacing: 20) {
+                VStack(alignment: .leading, spacing: AppSpacing.xl) {
                     Text("Action Button Kurulumu")
-                        .font(.title2.weight(.semibold))
+                        .font(AppTypography.title2)
+                        .foregroundStyle(AppColor.textPrimary)
 
-                    VStack(alignment: .leading, spacing: 12) {
-                        HStack(alignment: .top, spacing: 12) {
+                    VStack(alignment: .leading, spacing: AppSpacing.md) {
+                        HStack(alignment: .top, spacing: AppSpacing.md) {
                             Text("1")
-                                .font(.headline.weight(.bold))
+                                .font(AppTypography.captionEmphasis)
                                 .foregroundStyle(.white)
                                 .frame(width: 32, height: 32)
-                                .background(Circle().fill(Color.blue))
+                                .background(Circle().fill(AppColor.primary))
 
-                            VStack(alignment: .leading, spacing: 4) {
+                            VStack(alignment: .leading, spacing: AppSpacing.xs) {
                                 Text("Kısayollar Uygulamasını Aç")
-                                    .font(.headline)
+                                    .font(AppTypography.bodyEmphasis)
+                                    .foregroundStyle(AppColor.textPrimary)
                                 Text("Telefonunuzda Kısayollar uygulamasını açın.")
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
+                                    .font(AppTypography.caption)
+                                    .foregroundStyle(AppColor.textSecondary)
                             }
                         }
 
-                        HStack(alignment: .top, spacing: 12) {
+                        HStack(alignment: .top, spacing: AppSpacing.md) {
                             Text("2")
-                                .font(.headline.weight(.bold))
+                                .font(AppTypography.captionEmphasis)
                                 .foregroundStyle(.white)
                                 .frame(width: 32, height: 32)
-                                .background(Circle().fill(Color.blue))
+                                .background(Circle().fill(AppColor.primary))
 
-                            VStack(alignment: .leading, spacing: 4) {
+                            VStack(alignment: .leading, spacing: AppSpacing.xs) {
                                 Text("Yeni Kısayol Oluştur")
-                                    .font(.headline)
+                                    .font(AppTypography.bodyEmphasis)
+                                    .foregroundStyle(AppColor.textPrimary)
                                 Text("'+' tuşuna basarak yeni bir kısayol başlatın.")
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
+                                    .font(AppTypography.caption)
+                                    .foregroundStyle(AppColor.textSecondary)
                             }
                         }
 
-                        HStack(alignment: .top, spacing: 12) {
+                        HStack(alignment: .top, spacing: AppSpacing.md) {
                             Text("3")
-                                .font(.headline.weight(.bold))
+                                .font(AppTypography.captionEmphasis)
                                 .foregroundStyle(.white)
                                 .frame(width: 32, height: 32)
-                                .background(Circle().fill(Color.blue))
+                                .background(Circle().fill(AppColor.primary))
 
-                            VStack(alignment: .leading, spacing: 4) {
+                            VStack(alignment: .leading, spacing: AppSpacing.xs) {
                                 Text("Aksiyonları Ekle")
-                                    .font(.headline)
+                                    .font(AppTypography.bodyEmphasis)
+                                    .foregroundStyle(AppColor.textPrimary)
                                 Text("Aşağıdaki sırayla aksiyonları ekleyin:")
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
+                                    .font(AppTypography.caption)
+                                    .foregroundStyle(AppColor.textSecondary)
 
-                                VStack(alignment: .leading, spacing: 8) {
+                                VStack(alignment: .leading, spacing: AppSpacing.sm) {
                                     Text("a) Dictate Text (Türkçe konuş)")
                                     Text("b) Translate (Turkish → German)")
                                     Text("c) Open DeutschLernen (Add Entry)")
                                 }
-                                .font(.caption)
-                                .padding(.top, 8)
+                                .font(AppTypography.caption)
+                                .foregroundStyle(AppColor.textSecondary)
+                                .padding(.top, AppSpacing.md)
                             }
                         }
 
-                        HStack(alignment: .top, spacing: 12) {
+                        HStack(alignment: .top, spacing: AppSpacing.md) {
                             Text("4")
-                                .font(.headline.weight(.bold))
+                                .font(AppTypography.captionEmphasis)
                                 .foregroundStyle(.white)
                                 .frame(width: 32, height: 32)
-                                .background(Circle().fill(Color.blue))
+                                .background(Circle().fill(AppColor.primary))
 
-                            VStack(alignment: .leading, spacing: 4) {
+                            VStack(alignment: .leading, spacing: AppSpacing.xs) {
                                 Text("Action Button'a Ata")
-                                    .font(.headline)
+                                    .font(AppTypography.bodyEmphasis)
+                                    .foregroundStyle(AppColor.textPrimary)
                                 Text("Ayarlar → Action Button'a gidin ve bu kısayolu seçin.")
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
+                                    .font(AppTypography.caption)
+                                    .foregroundStyle(AppColor.textSecondary)
                             }
                         }
                     }
-                    .padding(.top, 12)
+                    .padding(.top, AppSpacing.md)
 
-                    VStack(alignment: .leading, spacing: 8) {
+                    VStack(alignment: .leading, spacing: AppSpacing.md) {
                         Text("Ayrıntılı Adımlar")
-                            .font(.headline)
+                            .font(AppTypography.bodyEmphasis)
+                            .foregroundStyle(AppColor.textPrimary)
 
                         Text("Kısayol akışı:")
-                            .font(.caption.weight(.semibold))
+                            .font(AppTypography.captionEmphasis)
+                            .foregroundStyle(AppColor.textPrimary)
 
-                        VStack(alignment: .leading, spacing: 4) {
+                        VStack(alignment: .leading, spacing: AppSpacing.sm) {
                             Text("1. 'Dictate Text' aksiyonunu ekleyin")
                             Text("2. 'Translate' aksiyonunu ekleyin:")
                             Text("   - From: Turkish")
@@ -143,8 +151,8 @@ struct ActionButtonSetupView: View {
                             Text("   - Turkish: Dictate Text sonucu")
                             Text("   - German: Translate sonucu")
                         }
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .font(AppTypography.caption)
+                        .foregroundStyle(AppColor.textSecondary)
                         .lineLimit(nil)
                     }
 
@@ -153,10 +161,12 @@ struct ActionButtonSetupView: View {
                     Button(action: { dismiss() }) {
                         Text("Anladım")
                             .frame(maxWidth: .infinity)
+                            .foregroundStyle(.white)
                     }
                     .buttonStyle(.borderedProminent)
+                    .tint(AppColor.primary)
                 }
-                .padding()
+                .padding(AppSpacing.lg)
             }
             .navigationTitle("Action Button")
             .navigationBarTitleDisplayMode(.inline)

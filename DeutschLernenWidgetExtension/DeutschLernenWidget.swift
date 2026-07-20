@@ -6,38 +6,45 @@ struct DeutschLernenWidgetEntryView: View {
 
     var body: some View {
         if let entry = entry.entry {
-            VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .leading, spacing: AppSpacing.md) {
                 Text(entry.turkish)
-                    .font(.headline.weight(.semibold))
+                    .font(AppTypography.title3)
+                    .foregroundStyle(AppColor.textPrimary)
                     .lineLimit(3)
 
                 Text(entry.german)
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                    .font(AppTypography.body)
+                    .foregroundStyle(AppColor.textSecondary)
                     .lineLimit(3)
 
                 Spacer()
 
                 Button(intent: NextEntryIntent()) {
                     Text("Sonraki")
-                        .font(.caption.weight(.semibold))
+                        .font(AppTypography.captionEmphasis)
+                        .foregroundStyle(.white)
                 }
                 .buttonStyle(.plain)
-                .padding(.top, 8)
+                .padding(.horizontal, AppSpacing.md)
+                .padding(.vertical, AppSpacing.sm)
+                .background(AppColor.primary)
+                .cornerRadius(AppSpacing.cornerSmall)
+                .padding(.top, AppSpacing.md)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-            .padding()
-            .background(.fill.secondary)
+            .padding(AppSpacing.lg)
+            .background(AppColor.surface)
         } else {
-            VStack(alignment: .center, spacing: 8) {
+            VStack(alignment: .center, spacing: AppSpacing.md) {
                 Text("Kayıt Bulunamadı")
-                    .font(.headline)
+                    .font(AppTypography.title3)
+                    .foregroundStyle(AppColor.textPrimary)
                 Text("Önce bir kayıt ekleyin")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .font(AppTypography.caption)
+                    .foregroundStyle(AppColor.textSecondary)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(.fill.secondary)
+            .background(AppColor.surface)
         }
     }
 }

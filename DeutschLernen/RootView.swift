@@ -19,6 +19,7 @@ struct RootView: View {
                     Label("Ayarlar", systemImage: "gear")
                 }
         }
+        .tint(AppColor.primary)
     }
 }
 

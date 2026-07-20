@@ -36,18 +36,24 @@ struct AddEditEntryForm: View {
     var body: some View {
         NavigationStack {
             Form {
-                TextField("Türkçe", text: $turkish)
-                TextField("Almanca", text: $german)
+                Section("Türkçe") {
+                    TextField("Türkçe kelime veya cümle", text: $turkish)
+                }
+                Section("Almanca") {
+                    TextField("Almanca çeviri", text: $german)
+                }
             }
             .navigationTitle(isEditing ? "Düzenle" : "Yeni Kayıt")
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("İptal") { dismiss() }
+                        .tint(AppColor.textSecondary)
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Kaydet") { save() }
                         .disabled(turkish.trimmingCharacters(in: .whitespaces).isEmpty
                                   || german.trimmingCharacters(in: .whitespaces).isEmpty)
+                        .tint(AppColor.primary)
                 }
             }
         }

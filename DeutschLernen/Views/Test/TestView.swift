@@ -66,34 +66,35 @@ struct TestView: View {
     }
 
     private func testCard(_ entry: Entry) -> some View {
-        VStack(alignment: .leading, spacing: 24) {
+        VStack(alignment: .leading, spacing: AppSpacing.xl) {
             Text(entry.turkish)
-                .font(.title2.weight(.semibold))
+                .font(AppTypography.title2)
+                .foregroundStyle(AppColor.textPrimary)
 
             if isGermanRevealed {
                 Text(entry.german)
-                    .font(.title3)
-                    .foregroundStyle(.secondary)
+                    .font(AppTypography.body)
+                    .foregroundStyle(AppColor.textSecondary)
             } else {
                 Text("Almancasını düşün, sonra dokun")
-                    .font(.title3)
-                    .foregroundStyle(.tertiary)
+                    .font(AppTypography.body)
+                    .foregroundStyle(AppColor.textTertiary)
             }
 
             Spacer()
 
-            HStack {
-                Text("✓ Doğru: sağa")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+            HStack(spacing: AppSpacing.md) {
+                Label("✓ Doğru: sağa", systemImage: "")
+                    .font(AppTypography.caption)
+                    .foregroundStyle(AppColor.success)
                 Spacer()
-                Text("✗ Yanlış: sola")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                Label("✗ Yanlış: sola", systemImage: "")
+                    .font(AppTypography.caption)
+                    .foregroundStyle(AppColor.error)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(24)
+        .padding(AppSpacing.lg)
         .modifier(CardBackground())
         .onTapGesture {
             withAnimation { isGermanRevealed.toggle() }

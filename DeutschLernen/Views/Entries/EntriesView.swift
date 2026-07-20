@@ -30,6 +30,7 @@ struct EntriesView: View {
                         Label("Stack", systemImage: "square.stack").tag(EntriesDisplayMode.stack)
                     }
                     .pickerStyle(.segmented)
+                    .tint(AppColor.primary)
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     EditButton()
@@ -38,6 +39,7 @@ struct EntriesView: View {
                     Button(action: { formMode = .create }) {
                         Label("Ekle", systemImage: "plus")
                     }
+                    .tint(AppColor.primary)
                 }
             }
             .sheet(item: $formMode) { mode in

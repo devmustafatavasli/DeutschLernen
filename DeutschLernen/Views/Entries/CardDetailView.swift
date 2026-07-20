@@ -7,41 +7,47 @@ struct CardDetailView: View {
     @State private var formMode: EntryFormMode?
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 24) {
-            VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: AppSpacing.xl) {
+            VStack(alignment: .leading, spacing: AppSpacing.md) {
                 Text("Türkçe")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .font(AppTypography.caption)
+                    .foregroundStyle(AppColor.textSecondary)
                 Text(entry.turkish)
-                    .font(.title2.weight(.semibold))
+                    .font(AppTypography.title2)
+                    .foregroundStyle(AppColor.textPrimary)
             }
 
-            VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .leading, spacing: AppSpacing.md) {
                 Text("Almanca")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .font(AppTypography.caption)
+                    .foregroundStyle(AppColor.textSecondary)
                 Text(entry.german)
-                    .font(.title2.weight(.semibold))
+                    .font(AppTypography.title2)
+                    .foregroundStyle(AppColor.textPrimary)
             }
 
             Spacer()
 
-            HStack(spacing: 12) {
+            HStack(spacing: AppSpacing.md) {
                 Button(action: { entry.isFavorite.toggle(); try? modelContext.save() }) {
-                    Label("", systemImage: entry.isFavorite ? "heart.fill" : "heart")
-                        .foregroundStyle(entry.isFavorite ? .red : .gray)
+                    Label(
+                        entry.isFavorite ? "Favorilerden çıkar" : "Favorilere ekle",
+                        systemImage: entry.isFavorite ? "heart.fill" : "heart"
+                    )
+                    .foregroundStyle(entry.isFavorite ? AppColor.error : AppColor.textSecondary)
                 }
 
                 Button(action: { formMode = .edit(entry) }) {
-                    Label("", systemImage: "pencil")
+                    Label("Düzenle", systemImage: "pencil")
+                        .foregroundStyle(AppColor.textSecondary)
                 }
 
                 Spacer()
             }
         }
-        .padding(24)
+        .padding(AppSpacing.lg)
         .modifier(CardBackground())
-        .padding(16)
+        .padding(AppSpacing.lg)
         .navigationTitle("Detay")
         .navigationBarTitleDisplayMode(.inline)
         .sheet(item: $formMode) { mode in
